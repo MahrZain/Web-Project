@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Interactive Home Page</title>
+  <style>
+
+    :root {
+      --text-animation-color-start: rgba(255, 0, 0, 1);
+      --text-animation-color-middle: rgba(0, 255, 0, 1);
+      --text-animation-color-end: rgba(0, 0, 255, 1);
+      --background-dark: #121212;
+      --font-family-default: 'Arial', sans-serif;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: var(--font-family-default);
+      color: #fff;
+    }
+    
+
+    .background {
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .content {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      color: #333;
+      text-align: center;
+    }
+    
+
+    input[type="text"],
+    button {
+      padding: 12px;
+      margin: 8px 0;
+      width: calc(100% - 24px);
+      display: block;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    
+
+    .container {
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+    }
+    .radio-group {
+      text-align: left;
+      margin: 10px 0;
+    }
+    .radio-group input[type="radio"] {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    
+  
+    .nc-animated-title {
+      margin-top: 2%;
+      margin-bottom: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(90deg, var(--text-animation-color-start), var(--text-animation-color-middle), var(--text-animation-color-end));
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 20px;
+      font-weight: bold;
+      animation: nc-slide-colors 5s ease infinite;
+    }
+    @keyframes nc-slide-colors {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+
+    h1 {
+      background: linear-gradient(90deg, rgba(255,0,0,1), rgb(212, 13, 179), rgba(0,0,255,1));
+      background-size: 200% auto;
+      color: #000;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow 3s linear infinite;
+    }
+    @keyframes rainbow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+
+    .btn-warning {
+      width: 9vw;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .btn-warning:hover {
+      background-color: #0056b3;
+    }
+    
+    
+    .log-out {
+      margin-top: 1%;
+    }
+    .log-out a {
+      text-decoration: none;
+    }
+    
+    
+    .submissionCount {
+      color: red;
+      font-weight: 600;
+    }
+    
+    @media (max-width: 610px) {
+      .content { padding: 15px; }
+      .btn-warning { width: 20vw; }
+    }
+  </style>
+</head>
+<body>
+  <div class="background">
+    <div class="content">
+      <h1>Enter IP</h1>
+      <form id="userForm" action="index.html" method="GET">
+        <input name="ip" type="text" id="userInput" placeholder="Enter your IP here" required>
+        <div class="container">
+          <div class="radio-group">
+            <input name="actiontype" type="radio" id="clickOption" value="Click" checked>
+            <label for="clickOption">Click</label>
+          </div>
+          <div class="radio-group">
+            <input name="actiontype" type="radio" id="sessionOption" value="Session">
+            <label for="sessionOption">Session</label>
+          </div>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+      <div class="submissionCount" id="submissionCount">
+        Today Submissions: 0
+      </div>
+      <div style="margin-top:5%; display: flex; align-items: center;" class="container">
+        <div style="font-size: large; margin-right: 10px;">Made With ❤️ by</div>
+        <a style="text-decoration: none;" href="https://linktr.ee/nullxco">
+          <div class="nc-animated-title">NullxCoder</div>
+        </a>
+      </div>
+      <div class="container log-out">
+        <a href="login.html">
+          <button type="button" class="btn-warning">Login</button>
+        </a>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const form = document.getElementById('userForm');
+      const submissionCount = document.getElementById('submissionCount');
+      let count = 0;
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        count++;
+        submissionCount.innerText = 'Today Submissions: ' + count;
+        document.getElementById('userInput').value = '';
+      });
+    });
+    
+    setTimeout(() => {
+      const alerts = document.querySelectorAll('.alert');
+      alerts.forEach(alert => alert.remove());
+    }, 4000);
+  </script>
+</body>
+</html>
